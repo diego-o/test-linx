@@ -24,14 +24,32 @@ namespace SocialNetwork.Infrastructure.Repositories
         public PersonFeedEntity? GetById(int personFeedId) =>
             _dataContext.Feeds.AsNoTracking().FirstOrDefault(t => t.Id == personFeedId);
 
-        public PageResult GetPaginatedAll(int idPerson, PageQuery page)
+        public PageResult GetPaginatedAll(PageQuery page)
         {
-            throw new NotImplementedException();
-        }
+            var feeds = _dataContext.Feeds
+                .AsNoTracking()
+                .Where(t => t.DateMessage >= DateTime.Now.Date)
+                .OrderBy(t => t.DateMessage)
+                .Skip((page.Page - 1) * page.Size)
+                .Take(page.Size)
+                .ToList();
 
-        public PageResult GetPaginatedByIdPerson(int idPerson, PageQuery page)
-        {
-            throw new NotImplementedException();
+            var totalFeeds = _dataContext.Feeds.AsNoTracking().Where(t => t.DateMessage >= DateTime.Now.Date).Count();
+            var totalPages = (int)Math.Ceiling((double)totalFeeds / page.Size);
+
+            return new PageResult()
+            {
+                CurrentPage = page.Page,
+                Lines = page.Size,
+                Pages = totalPages,
+                Total = totalFeeds,
+                DataSource = feeds.Select(t => new
+                {
+                    t.Id,
+                    t.DateMessage,
+                    t.Message
+                }).ToList()
+            };
         }
 
         public void Insert(PersonFeedEntity personFeed)

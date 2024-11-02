@@ -10,12 +10,25 @@ export type Login = {
     password: string;
 };
 
-export type MyCustomError = {
-    StatusCode: number;
-    Message: string;
-    Detail: string;
+export type Message = {
+    message: string;
 }
 
-export type Message = {
+export type PageQuery = {
+    size: number;
+    page: number;
+}
+
+export type PageResult = {
+    lines: number;
+    pages: number;
+    currentPage: number;
+    total: number;
+    dataSource: PageResultFeed[];
+}
+
+export type PageResultFeed = {
+    id: number;
+    dateMessage: Date;
     message: string;
 }

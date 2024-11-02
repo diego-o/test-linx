@@ -2,17 +2,18 @@
 using Microsoft.AspNetCore.Mvc;
 using SocialNetwork.Api.Services.Interface;
 using SocialNetwork.Api.ViewModel;
+using SocialNetwork.Infrastructure.Structures;
 
 namespace SocialNetwork.Api.Controllers
 {
     [Authorize(AuthenticationSchemes = "Bearer")]
     [Route("api/[controller]")]
     [ApiController]
-    public class MessageController : ControllerBase
+    public class FeedController : ControllerBase
     {
         private readonly IPersonFeedService _personFeedService;
 
-        public MessageController(IPersonFeedService personFeedService)
+        public FeedController(IPersonFeedService personFeedService)
         {
             _personFeedService = personFeedService;
         }
@@ -23,5 +24,9 @@ namespace SocialNetwork.Api.Controllers
             _personFeedService.PostMessage(postMessage);
             return Created();
         }
+
+        [HttpPost("paged")]
+        public PageResult FeedPaged([FromBody] PageQuery pageQuery) =>
+            _personFeedService.Paged(pageQuery);
     }
 }

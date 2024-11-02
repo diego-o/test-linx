@@ -2,6 +2,7 @@
 using SocialNetwork.Api.ViewModel;
 using SocialNetwork.Domain.Entities;
 using SocialNetwork.Infrastructure.Repositories.Interfaces;
+using SocialNetwork.Infrastructure.Structures;
 
 namespace SocialNetwork.Api.Services
 {
@@ -18,15 +19,11 @@ namespace SocialNetwork.Api.Services
 
         public void PostMessage(PostMessageModel postMessage)
         {
-            try
-            {
-                var newPost = new PersonFeedEntity(_currentUser.IdPersonCurrent, postMessage.Message);
-                _personFeedRepository.Insert(newPost);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            var newPost = new PersonFeedEntity(_currentUser.IdPersonCurrent, postMessage.Message);
+            _personFeedRepository.Insert(newPost);
         }
+
+        public PageResult Paged(PageQuery pageQuery) =>
+            _personFeedRepository.GetPaginatedAll(pageQuery);
     }
 }

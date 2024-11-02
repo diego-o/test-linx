@@ -8,7 +8,6 @@ namespace SocialNetwork.Infrastructure.Repositories.Interfaces
         void Insert(PersonFeedEntity personFeed);
         void Delete(PersonFeedEntity personFeed);
         PersonFeedEntity? GetById(int personFeedId);
-        PageResult GetPaginatedByIdPerson(int idPerson, PageQuery page);
-        PageResult GetPaginatedAll(int idPerson, PageQuery page);
+        PageResult GetPaginatedAll(PageQuery page);
     }
 }

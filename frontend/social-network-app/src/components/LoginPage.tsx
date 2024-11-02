@@ -42,7 +42,7 @@ const LoginPage: React.FC = () => {
             setError('Logado com sucesso');
             navigate('/feed');
         } catch (error) {
-            setError((error as any).response.data.Detail);
+            setError((error as any).response?.data?.Detail);
         }
     };
 

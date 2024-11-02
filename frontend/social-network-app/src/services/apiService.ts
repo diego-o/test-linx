@@ -1,15 +1,12 @@
 import axios from 'axios';
-import { Login, Message, Register } from '../types/types';
+import { Login, Message, PageQuery, PageResult, Register } from '../types/types';
 import tokenService from './tokenService';
 
 const API_URL = 'https://localhost:7292/api';
 
 const api = axios.create({
     baseURL: API_URL,
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': tokenService.getToken()
-    },
+    headers: { 'Content-Type': 'application/json' }
 });
 
 const apiService = {
@@ -22,7 +19,21 @@ const apiService = {
         return response.data;
     },
     postMessage: async (message: Message): Promise<any> => {
-        const response = await api.post('/Message', message);
+        const response = await api.post('/Feed', message, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': tokenService.getToken(),
+            }
+        });
+        return response.data;
+    },
+    getFeeds: async (pageQuery: PageQuery): Promise<PageResult> => {
+        const response = await api.post<PageResult>('/Feed/paged', pageQuery, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': tokenService.getToken(),
+            }
+        });
         return response.data;
     }
 };

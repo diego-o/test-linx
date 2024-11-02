@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import apiService from '../services/apiService';
-import { Message, Register } from '../types/types';
+import { Message } from '../types/types';
 import { Link } from 'react-router-dom';
+import FeedList from './FeedList';
 
 interface FormData {
     message: string;
@@ -35,7 +36,7 @@ const FeedPage: React.FC = () => {
             setError('Mensagem postada com sucesso');
             formData.message = "";
         } catch (error) {
-            if ((error as any).response?.data?.Detail ==undefined)
+            if ((error as any).response?.data?.Detail == undefined)
                 setError("Ocorreu um erro inesperado");
             else
                 setError((error as any).response?.data?.Detail);
@@ -58,13 +59,18 @@ const FeedPage: React.FC = () => {
                         style={styles.input}
                     />
                 </div>
-                
+
                 {error && <p style={styles.error}>{error}</p>}
                 <button type="submit" style={styles.button}>Postar</button>
             </form>
+            <div>
+                <h2>Postagens Recentes</h2>
+                <FeedList />
+            </div>
             <div style={styles.container}>
                 <button style={styles.button}><Link to="/">Sair</Link></button>
-            </div>            
+            </div>
+
         </div>
 
     );
