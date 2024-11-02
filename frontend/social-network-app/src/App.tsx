@@ -1,9 +1,9 @@
 import React from 'react';
 import './App.css';
-import LoginPage from './components/LoginPage';
-import RegisterPage from './components/RegisterPage';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import FeedPage from './components/FeedPage';
+import FeedPage from './pages/FeedPage';
 
 const App: React.FC = () => {
   return (

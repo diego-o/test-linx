@@ -31,4 +31,5 @@ export type PageResultFeed = {
     id: number;
     dateMessage: Date;
     message: string;
+    name: string;
 }

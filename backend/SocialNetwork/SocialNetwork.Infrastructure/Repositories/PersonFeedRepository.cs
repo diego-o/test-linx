@@ -27,9 +27,10 @@ namespace SocialNetwork.Infrastructure.Repositories
         public PageResult GetPaginatedAll(PageQuery page)
         {
             var feeds = _dataContext.Feeds
+                .Include(t => t.Person)
                 .AsNoTracking()
                 .Where(t => t.DateMessage >= DateTime.Now.Date)
-                .OrderBy(t => t.DateMessage)
+                .OrderByDescending(t => t.DateMessage)
                 .Skip((page.Page - 1) * page.Size)
                 .Take(page.Size)
                 .ToList();
@@ -47,7 +48,8 @@ namespace SocialNetwork.Infrastructure.Repositories
                 {
                     t.Id,
                     t.DateMessage,
-                    t.Message
+                    t.Message,
+                    t.Person.Name
                 }).ToList()
             };
         }

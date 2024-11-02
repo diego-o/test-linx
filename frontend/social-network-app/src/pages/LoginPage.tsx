@@ -4,6 +4,7 @@ import { Login } from '../types/types';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import tokenService from '../services/tokenService';
+import { globalStylesApp } from '../MyCss';
 
 interface FormData {
     email: string;
@@ -47,10 +48,10 @@ const LoginPage: React.FC = () => {
     };
 
     return (
-        <div style={styles.container}>
+        <div style={globalStylesApp.container}>
             <h1>Login</h1>
-            <form onSubmit={handleSubmit} style={styles.form}>
-                <div style={styles.inputGroup}>
+            <form onSubmit={handleSubmit} style={globalStylesApp.form}>
+                <div style={globalStylesApp.inputGroup}>
                     <label htmlFor="email">E-mail:</label>
                     <input
                         type="email"
@@ -59,10 +60,10 @@ const LoginPage: React.FC = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
-                        style={styles.input}
+                        style={globalStylesApp.input}
                     />
                 </div>
-                <div style={styles.inputGroup}>
+                <div style={globalStylesApp.inputGroup}>
                     <label htmlFor="password">Senha:</label>
                     <input
                         type="password"
@@ -71,60 +72,18 @@ const LoginPage: React.FC = () => {
                         value={formData.password}
                         onChange={handleChange}
                         required
-                        style={styles.input}
+                        style={globalStylesApp.input}
                     />
                 </div>
-                {error && <p style={styles.error}>{error}</p>}
-                <button type="submit" style={styles.button}>Logar</button>
+                {error && <p style={globalStylesApp.error}>{error}</p>}
+                <button type="submit" style={globalStylesApp.button}>Logar</button>
             </form>
-            <div style={styles.container}>
-                <button style={styles.button}><Link to="/register">Primeiro Acesso</Link></button>
+            <div style={globalStylesApp.container}>
+                <button style={globalStylesApp.button}><Link to="/register">Primeiro Acesso</Link></button>
             </div>            
         </div>
 
     );
-};
-
-const styles = {
-    form: {
-        display: 'flex',
-        flexDirection: 'column' as 'column',
-        alignItems: 'center',
-        gap: '10px',
-        width: '300px',
-        margin: '20px auto',
-        padding: '20px',
-        border: '1px solid #ddd',
-        borderRadius: '5px',
-    },
-    inputGroup: {
-        display: 'flex',
-        flexDirection: 'column' as 'column',
-        width: '100%',
-        gap: '5px',
-    },
-    input: {
-        padding: '8px',
-        borderRadius: '4px',
-        border: '1px solid #ccc',
-        width: '100%',
-    },
-    button: {
-        padding: '10px 15px',
-        backgroundColor: '#007BFF',
-        color: 'white',
-        border: 'none',
-        borderRadius: '5px',
-        cursor: 'pointer',
-    },
-    error: {
-        color: 'red',
-    },
-    container: {
-        display: 'flex',
-        flexDirection: 'column' as 'column',
-        alignItems: 'center'
-    }
 };
 
 export default LoginPage;

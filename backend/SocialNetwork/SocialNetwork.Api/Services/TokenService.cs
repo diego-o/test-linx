@@ -10,7 +10,7 @@ namespace SocialNetwork.Api.Services
         private static string _secret => "ldh587143luortyq659dhf01mgh624zx";
 
         public static byte[] Key => Encoding.ASCII.GetBytes(_secret);
-        public static int ExpiredTimeToken { get; set; } = 30;
+        public static int ExpiredTimeToken { get; set; } = 60;
 
         public static string GenerateJWTToken(string UserName, int userId)
         {
@@ -33,14 +33,11 @@ namespace SocialNetwork.Api.Services
         public static JwtSecurityToken? FromToken(string token)
         {
             var handler = new JwtSecurityTokenHandler();
-            var jsonToken = handler.ReadToken(token);
-
+            handler.ReadToken(token);
             return handler.ReadToken(token) as JwtSecurityToken;
         }
 
-        public static DateTime ExpireIn()
-        {
-            return DateTime.UtcNow.AddMinutes(ExpiredTimeToken);
-        }
+        public static DateTime ExpireIn() =>
+            DateTime.UtcNow.AddMinutes(ExpiredTimeToken);
     }
 }
