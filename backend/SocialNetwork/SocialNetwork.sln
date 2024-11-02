@@ -7,13 +7,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{86E2B22C-7A6
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{024A84E1-B2D3-4DF1-8C1E-92E862BDFDAB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.Domain", "SocialNetwork.Domain\SocialNetwork.Domain.csproj", "{07188557-8536-4220-B9AA-34C459A5145A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.Domain", "SocialNetwork.Domain\SocialNetwork.Domain.csproj", "{07188557-8536-4220-B9AA-34C459A5145A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.Tests.Unity", "SocialNetwork.Tests.Unity\SocialNetwork.Tests.Unity.csproj", "{40C12165-8F0F-469F-B7C3-C5C9C5197CCA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.Tests.Unity", "SocialNetwork.Tests.Unity\SocialNetwork.Tests.Unity.csproj", "{40C12165-8F0F-469F-B7C3-C5C9C5197CCA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.Infrastructure", "SocialNetwork.Infrastructure\SocialNetwork.Infrastructure.csproj", "{F5355CBD-C07F-4CBC-8517-45E940EEFFBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.Infrastructure", "SocialNetwork.Infrastructure\SocialNetwork.Infrastructure.csproj", "{F5355CBD-C07F-4CBC-8517-45E940EEFFBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.Api", "SocialNetwork.Api\SocialNetwork.Api.csproj", "{A07C78F0-978F-425D-A18F-0B60EA3DB2B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SocialNetwork.Api", "SocialNetwork.Api\SocialNetwork.Api.csproj", "{A07C78F0-978F-425D-A18F-0B60EA3DB2B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SocialNetwork.Application", "SocialNetwork.Application\SocialNetwork.Application.csproj", "{2F25D4B4-2227-47A9-9B5D-DDF713ED358F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -37,6 +39,10 @@ Global
 		{A07C78F0-978F-425D-A18F-0B60EA3DB2B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A07C78F0-978F-425D-A18F-0B60EA3DB2B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A07C78F0-978F-425D-A18F-0B60EA3DB2B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2F25D4B4-2227-47A9-9B5D-DDF713ED358F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2F25D4B4-2227-47A9-9B5D-DDF713ED358F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2F25D4B4-2227-47A9-9B5D-DDF713ED358F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2F25D4B4-2227-47A9-9B5D-DDF713ED358F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{40C12165-8F0F-469F-B7C3-C5C9C5197CCA} = {024A84E1-B2D3-4DF1-8C1E-92E862BDFDAB}
 		{F5355CBD-C07F-4CBC-8517-45E940EEFFBD} = {86E2B22C-7A6F-4D0C-9AAF-562BDF1D10E9}
 		{A07C78F0-978F-425D-A18F-0B60EA3DB2B0} = {86E2B22C-7A6F-4D0C-9AAF-562BDF1D10E9}
+		{2F25D4B4-2227-47A9-9B5D-DDF713ED358F} = {86E2B22C-7A6F-4D0C-9AAF-562BDF1D10E9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {64238D90-8337-4442-BF9F-E887AB32F648}

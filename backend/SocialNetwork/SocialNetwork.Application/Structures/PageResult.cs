@@ -1,4 +1,4 @@
-﻿namespace SocialNetwork.Infrastructure.Structures
+﻿namespace SocialNetwork.Application.Structures
 {
     public struct PageResult
     {

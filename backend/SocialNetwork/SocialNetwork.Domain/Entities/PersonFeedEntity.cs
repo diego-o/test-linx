@@ -1,5 +1,4 @@
-﻿
-using SocialNetwork.Domain.Resources;
+﻿using SocialNetwork.Domain.Resources;
 
 namespace SocialNetwork.Domain.Entities
 {
@@ -25,7 +24,7 @@ namespace SocialNetwork.Domain.Entities
         private void Validate()
         {
             if (string.IsNullOrWhiteSpace(Message))
-                throw new ArgumentNullException(DomainValidationsResource.FeedMessageNotEpty);
+                throw new ArgumentException(DomainValidationsResource.FeedMessageNotEpty);
 
             if (IdPerson <= 0)
                 throw new ArgumentException(DomainValidationsResource.FeedIdPersonNotNull);

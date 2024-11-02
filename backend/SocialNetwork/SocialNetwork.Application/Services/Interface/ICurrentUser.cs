@@ -1,4 +1,4 @@
-﻿namespace SocialNetwork.Api.Services.Interface
+﻿namespace SocialNetwork.Application.Services.Interface
 {
     public interface ICurrentUser
     {

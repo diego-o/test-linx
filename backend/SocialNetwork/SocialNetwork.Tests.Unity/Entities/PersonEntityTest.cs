@@ -1,15 +1,16 @@
 ﻿using SocialNetwork.Domain.Entities;
 using SocialNetwork.Domain.Resources;
+using SocialNetwork.Tests.Unity.Fakers;
 
 namespace SocialNetwork.Tests.Unity.Entities
 {
-    public class PersonTest
+    public class PersonEntityTest
     {
         [Fact]
         public void Create_Person_Sucess() 
         {
             //Arrange & Act
-            var newPerson = new PersonEntity("Diego de Souza", "diego_1souza@hotmail.com", Convert.ToDateTime("1992-03-10"), "Diego@123");
+            var newPerson = PersonFaker.NewPersonEntity();
 
             //Assert
             Assert.NotNull(newPerson);

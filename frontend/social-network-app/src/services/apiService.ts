@@ -2,10 +2,10 @@ import axios from 'axios';
 import { Login, Message, PageQuery, PageResult, Register } from '../types/types';
 import tokenService from './tokenService';
 
-const API_URL = 'https://localhost:7292/api';
+const API_URL : string = (process.env.API_BASE_URL as string);
 
 const api = axios.create({
-    baseURL: API_URL,
+    baseURL: "https://localhost:7292/api",
     headers: { 'Content-Type': 'application/json' }
 });
 

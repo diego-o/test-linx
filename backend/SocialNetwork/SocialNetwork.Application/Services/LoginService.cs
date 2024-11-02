@@ -1,17 +1,19 @@
-﻿using SocialNetwork.Api.Services.Interface;
-using SocialNetwork.Api.ViewModel;
+﻿using SocialNetwork.Application.Repositories;
+using SocialNetwork.Application.Services.Interface;
+using SocialNetwork.Application.ViewModel;
 using SocialNetwork.Domain.Entities;
-using SocialNetwork.Infrastructure.Repositories.Interfaces;
 
-namespace SocialNetwork.Api.Services
+namespace SocialNetwork.Application.Services
 {
     public class LoginService : ILoginService
     {
         private readonly IPersonRepository _personRepository;
+        private readonly ITokenService _tokenService;
 
-        public LoginService(IPersonRepository personRepository)
+        public LoginService(IPersonRepository personRepository, ITokenService tokenService)
         {
             _personRepository = personRepository;
+            _tokenService = tokenService;
         }
 
         public TokenViewModel Login(LoginViewModel login)
@@ -20,13 +22,13 @@ namespace SocialNetwork.Api.Services
 
             VerifyPassword(login, person);
 
-            var token = TokenService.GenerateJWTToken(person.Email, person.Id);
+            var token = _tokenService.GenerateJWTToken(person.Email, person.Id);
 
             return new TokenViewModel
             {
                 Token = token,
-                Expires = DateTime.UtcNow.AddMinutes(TokenService.ExpiredTimeToken),
-                ExpiresIn = TokenService.ExpiredTimeToken / 60,
+                Expires = DateTime.UtcNow.AddMinutes(_tokenService.ExpiredTimeToken()),
+                ExpiresIn = _tokenService.ExpiredTimeToken() / 60,
                 Issued = DateTime.UtcNow
             };
         }

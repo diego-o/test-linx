@@ -1,6 +1,6 @@
-﻿using SocialNetwork.Api.ViewModel;
+﻿using SocialNetwork.Application.ViewModel;
 
-namespace SocialNetwork.Api.Services.Interface
+namespace SocialNetwork.Application.Services.Interface
 {
     public interface ILoginService
     {

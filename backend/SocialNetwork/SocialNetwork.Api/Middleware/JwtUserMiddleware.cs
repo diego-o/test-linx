@@ -1,5 +1,5 @@
-﻿using SocialNetwork.Api.Services;
-using SocialNetwork.Api.Services.Interface;
+﻿using SocialNetwork.Application.Services;
+using SocialNetwork.Application.Services.Interface;
 
 namespace SocialNetwork.Api.Middleware
 {
@@ -12,12 +12,12 @@ namespace SocialNetwork.Api.Middleware
             _next = next;
         }
 
-        public async Task InvokeAsync(HttpContext context, ICurrentUser currentUser)
+        public async Task InvokeAsync(HttpContext context, ICurrentUser currentUser, ITokenService tokenService)
         {
             if (context.Request.Headers.TryGetValue("Authorization", out var authorizationHeader))
             {
                 var token = authorizationHeader.ToString().Replace("Bearer ", string.Empty);
-                var jwtToken = TokenService.FromToken(token);
+                var jwtToken = tokenService.FromToken(token);
                 var userId = jwtToken?.Claims.FirstOrDefault(t => t.Type == "userId")?.Value;
                 if (userId != null)
                     currentUser.IdPersonCurrent = Convert.ToInt32(userId);

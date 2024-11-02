@@ -1,4 +1,4 @@
-﻿namespace SocialNetwork.Api.ViewModel
+﻿namespace SocialNetwork.Application.ViewModel
 {
     public struct TokenViewModel
     {

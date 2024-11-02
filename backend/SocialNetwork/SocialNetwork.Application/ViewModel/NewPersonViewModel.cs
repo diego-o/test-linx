@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace SocialNetwork.Api.ViewModel
+namespace SocialNetwork.Application.ViewModel
 {
-    public struct NewPersonModel
+    public struct NewPersonViewModel
     {
         [Required]
         public string Name { get; set; }

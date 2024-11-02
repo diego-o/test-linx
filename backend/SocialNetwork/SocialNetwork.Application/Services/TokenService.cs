@@ -1,18 +1,26 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
+using SocialNetwork.Application.Services.Interface;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace SocialNetwork.Api.Services
+namespace SocialNetwork.Application.Services
 {
-    public static class TokenService
+    public class TokenService : ITokenService
     {
-        private static string _secret => "ldh587143luortyq659dhf01mgh624zx";
+        private readonly IConfiguration _configuration;
 
-        public static byte[] Key => Encoding.ASCII.GetBytes(_secret);
-        public static int ExpiredTimeToken { get; set; } = 60;
+        public TokenService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
-        public static string GenerateJWTToken(string UserName, int userId)
+        private string _secret => _configuration.GetValue<string>("JWT:Secret");
+
+        public byte[] Key => Encoding.ASCII.GetBytes(_secret);
+
+        public string GenerateJWTToken(string UserName, int userId)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
@@ -30,14 +38,17 @@ namespace SocialNetwork.Api.Services
             return tokenHandler.WriteToken(token);
         }
 
-        public static JwtSecurityToken? FromToken(string token)
+        public JwtSecurityToken? FromToken(string token)
         {
             var handler = new JwtSecurityTokenHandler();
             handler.ReadToken(token);
             return handler.ReadToken(token) as JwtSecurityToken;
         }
 
-        public static DateTime ExpireIn() =>
-            DateTime.UtcNow.AddMinutes(ExpiredTimeToken);
+        public DateTime ExpireIn() =>
+            DateTime.UtcNow.AddMinutes(ExpiredTimeToken());
+
+        public int ExpiredTimeToken() =>
+            _configuration.GetValue<int>("JWT:ExpiredTimeToken");
     }
 }

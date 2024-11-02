@@ -1,10 +1,10 @@
-﻿using SocialNetwork.Api.Services.Interface;
-using SocialNetwork.Api.ViewModel;
+﻿using SocialNetwork.Application.Repositories;
+using SocialNetwork.Application.Services.Interface;
+using SocialNetwork.Application.Structures;
+using SocialNetwork.Application.ViewModel;
 using SocialNetwork.Domain.Entities;
-using SocialNetwork.Infrastructure.Repositories.Interfaces;
-using SocialNetwork.Infrastructure.Structures;
 
-namespace SocialNetwork.Api.Services
+namespace SocialNetwork.Application.Services
 {
     public class PersonFeedService : IPersonFeedService
     {
@@ -17,7 +17,7 @@ namespace SocialNetwork.Api.Services
             _currentUser = currentUser;
         }
 
-        public void PostMessage(PostMessageModel postMessage)
+        public void PostMessage(PostMessageViewModel postMessage)
         {
             var newPost = new PersonFeedEntity(_currentUser.IdPersonCurrent, postMessage.Message);
             _personFeedRepository.Insert(newPost);

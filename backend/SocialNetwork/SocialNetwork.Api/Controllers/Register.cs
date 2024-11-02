@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SocialNetwork.Api.Services.Interface;
-using SocialNetwork.Api.ViewModel;
+using SocialNetwork.Application.Services.Interface;
+using SocialNetwork.Application.ViewModel;
 
 namespace SocialNetwork.Api.Controllers
 {
@@ -16,7 +16,7 @@ namespace SocialNetwork.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult NewAccount([FromBody] NewPersonModel newPerson)
+        public IActionResult NewAccount([FromBody] NewPersonViewModel newPerson)
         {
             _registerService.RegisterPerson(newPerson);
             return Created();

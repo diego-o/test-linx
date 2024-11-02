@@ -1,9 +1,9 @@
-﻿using SocialNetwork.Api.Services.Interface;
-using SocialNetwork.Api.ViewModel;
+﻿using SocialNetwork.Application.Repositories;
+using SocialNetwork.Application.Services.Interface;
+using SocialNetwork.Application.ViewModel;
 using SocialNetwork.Domain.Entities;
-using SocialNetwork.Infrastructure.Repositories.Interfaces;
 
-namespace SocialNetwork.Api.Services
+namespace SocialNetwork.Application.Services
 {
     public class RegisterService : IRegisterService
     {
@@ -14,13 +14,13 @@ namespace SocialNetwork.Api.Services
             _personRepository = personRepository;
         }
 
-        public void RegisterPerson(NewPersonModel newPerson)
+        public void RegisterPerson(NewPersonViewModel newPerson)
         {
             VerifyExists(newPerson);
             PersistPerson(newPerson);
         }
 
-        private void PersistPerson(NewPersonModel newPerson)
+        private void PersistPerson(NewPersonViewModel newPerson)
         {
             newPerson = CriptPassword(newPerson);
 
@@ -28,13 +28,13 @@ namespace SocialNetwork.Api.Services
             _personRepository.Insert(personEntity);
         }
 
-        private static NewPersonModel CriptPassword(NewPersonModel newPerson)
+        private static NewPersonViewModel CriptPassword(NewPersonViewModel newPerson)
         {
             newPerson.Password = PasswordService.HashPassword(new User() { UserName = newPerson.Email }, newPerson.Password);
             return newPerson;
         }
 
-        private void VerifyExists(NewPersonModel newPerson)
+        private void VerifyExists(NewPersonViewModel newPerson)
         {
             var personExist = _personRepository.GetByEmail(newPerson.Email);
 

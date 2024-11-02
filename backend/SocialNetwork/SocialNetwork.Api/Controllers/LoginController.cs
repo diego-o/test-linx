@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using SocialNetwork.Api.Services.Interface;
-using SocialNetwork.Api.ViewModel;
+using SocialNetwork.Application.Services.Interface;
+using SocialNetwork.Application.ViewModel;
 
 namespace SocialNetwork.Api.Controllers
 {

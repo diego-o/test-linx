@@ -1,13 +1,10 @@
 ﻿using SocialNetwork.Domain.Entities;
 
-namespace SocialNetwork.Infrastructure.Repositories.Interfaces
+namespace SocialNetwork.Application.Repositories
 {
     public interface IPersonRepository
     {
         PersonEntity Insert(PersonEntity person);
-        PersonEntity Update(PersonEntity person);
-        void Delete(PersonEntity person);
-        PersonEntity? GetById(int id);
         PersonEntity? GetByEmail(string email);
     }
 }

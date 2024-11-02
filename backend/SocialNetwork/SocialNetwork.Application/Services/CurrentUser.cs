@@ -1,6 +1,6 @@
-﻿using SocialNetwork.Api.Services.Interface;
+﻿using SocialNetwork.Application.Services.Interface;
 
-namespace SocialNetwork.Api.Services
+namespace SocialNetwork.Application.Services
 {
     public class CurrentUser : ICurrentUser
     {

@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using SocialNetwork.Api.Services.Interface;
-using SocialNetwork.Api.ViewModel;
-using SocialNetwork.Infrastructure.Structures;
+using SocialNetwork.Application.Services.Interface;
+using SocialNetwork.Application.Structures;
+using SocialNetwork.Application.ViewModel;
 
 namespace SocialNetwork.Api.Controllers
 {
@@ -19,7 +19,7 @@ namespace SocialNetwork.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostMessage([FromBody] PostMessageModel postMessage)
+        public IActionResult PostMessage([FromBody] PostMessageViewModel postMessage)
         {
             _personFeedService.PostMessage(postMessage);
             return Created();

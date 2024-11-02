@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.AspNetCore.Identity;
 
-namespace SocialNetwork.Api.Services
+namespace SocialNetwork.Application.Services
 {
     public static class PasswordService
     {
