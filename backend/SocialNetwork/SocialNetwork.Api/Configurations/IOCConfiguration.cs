@@ -9,6 +9,7 @@ namespace SocialNetwork.Api.Configurations
         {
             services.AddScoped<IRegisterService, RegisterService>();
             services.AddScoped<IPersonFeedService, PersonFeedService>();
+            services.AddScoped<ILoginService, LoginService>();
         }
     }
 }

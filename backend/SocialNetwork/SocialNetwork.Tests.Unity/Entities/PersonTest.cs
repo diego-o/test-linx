@@ -49,15 +49,5 @@ namespace SocialNetwork.Tests.Unity.Entities
             //Assert
             Assert.Equal(exception.Message, messageValidation);
         }
-
-        [Fact]
-        public void Validate_Password()
-        {
-            //Arrange & Act
-            var exception = Record.Exception(() => new PersonEntity("Diego", "diego_1souza@hotmail.com", Convert.ToDateTime("1992-03-10"), "123abc"));
-
-            //Assert
-            Assert.Equal(exception.Message, DomainValidationsResource.PasswordInvalid);
-        }
     }
 }

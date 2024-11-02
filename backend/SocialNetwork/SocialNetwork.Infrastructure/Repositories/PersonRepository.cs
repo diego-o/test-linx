@@ -20,6 +20,9 @@ namespace SocialNetwork.Infrastructure.Repositories
             _dbContext.SaveChanges();
         }
 
+        public PersonEntity? GetByEmail(string email) =>
+            _dbContext.Persons.AsNoTracking().FirstOrDefault(x => x.Email == email);
+
         public PersonEntity? GetById(int id) =>
             _dbContext.Persons.AsNoTracking().FirstOrDefault(x => x.Id == id);
 

@@ -29,7 +29,6 @@ namespace SocialNetwork.Domain.Entities
             ValidateName();
             ValidateEmail();
             ValidateBirth();
-            ValidatePassword();
         }
 
         private void ValidateName()
@@ -54,15 +53,6 @@ namespace SocialNetwork.Domain.Entities
                 throw new ArgumentException(DomainValidationsResource.AgeLessThan);
             if (age > 150)
                 throw new ArgumentException(DomainValidationsResource.OlderThan);
-        }
-
-        private void ValidatePassword()
-        {
-            var regex = new Regex(@"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$");
-            var isValid = regex.IsMatch(this.Password);
-
-            if (!isValid)
-                throw new ArgumentException(DomainValidationsResource.PasswordInvalid);
         }
     }
 }

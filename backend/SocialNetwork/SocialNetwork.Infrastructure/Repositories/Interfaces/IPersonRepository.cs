@@ -8,5 +8,6 @@ namespace SocialNetwork.Infrastructure.Repositories.Interfaces
         PersonEntity Update(PersonEntity person);
         void Delete(PersonEntity person);
         PersonEntity? GetById(int id);
+        PersonEntity? GetByEmail(string email);
     }
 }

@@ -16,15 +16,30 @@ namespace SocialNetwork.Api.Services
 
         public void RegisterPerson(NewPersonModel newPerson)
         {
-            try
-            {
-                var personEntity = new PersonEntity(newPerson.Name, newPerson.Email, newPerson.Birth, newPerson.Password);
-                _personRepository.Insert(personEntity);
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
+            VerifyExists(newPerson);
+            PersistPerson(newPerson);
+        }
+
+        private void PersistPerson(NewPersonModel newPerson)
+        {
+            newPerson = CriptPassword(newPerson);
+
+            var personEntity = new PersonEntity(newPerson.Name, newPerson.Email, newPerson.Birth, newPerson.Password);
+            _personRepository.Insert(personEntity);
+        }
+
+        private static NewPersonModel CriptPassword(NewPersonModel newPerson)
+        {
+            newPerson.Password = PasswordService.HashPassword(new User() { UserName = newPerson.Email }, newPerson.Password);
+            return newPerson;
+        }
+
+        private void VerifyExists(NewPersonModel newPerson)
+        {
+            var personExist = _personRepository.GetByEmail(newPerson.Email);
+
+            if (personExist is not null)
+                throw new ArgumentException("E-mail já cadastrado");
         }
     }
 }
