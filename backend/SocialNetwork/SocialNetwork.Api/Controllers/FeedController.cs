@@ -19,14 +19,14 @@ namespace SocialNetwork.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult PostMessage([FromBody] PostMessageViewModel postMessage)
+        public async Task<IActionResult> PostMessageAsync([FromBody] PostMessageViewModel postMessage)
         {
-            _personFeedService.PostMessage(postMessage);
+            await _personFeedService.PostMessageAsync(postMessage);
             return Created();
         }
 
         [HttpPost("paged")]
-        public PageResult FeedPaged([FromBody] PageQuery pageQuery) =>
-            _personFeedService.Paged(pageQuery);
+        public async Task<PageResult> FeedPaged([FromBody] PageQuery pageQuery) =>
+            await _personFeedService.PagedAsync(pageQuery);
     }
 }

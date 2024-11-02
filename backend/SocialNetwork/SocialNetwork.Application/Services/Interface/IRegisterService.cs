@@ -4,6 +4,6 @@ namespace SocialNetwork.Application.Services.Interface
 {
     public interface IRegisterService
     {
-        void RegisterPerson(NewPersonViewModel newPerson);
+        Task RegisterPersonAsync(NewPersonViewModel newPerson);
     }
 }

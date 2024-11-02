@@ -1,5 +1,4 @@
-﻿using SocialNetwork.Application.Services;
-using SocialNetwork.Application.Services.Interface;
+﻿using SocialNetwork.Application.Services.Interface;
 
 namespace SocialNetwork.Api.Middleware
 {

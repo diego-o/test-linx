@@ -16,7 +16,7 @@ namespace SocialNetwork.Api.Controllers
         }
 
         [HttpPost]
-        public TokenViewModel Login([FromBody] LoginViewModel login) => 
-            _loginService.Login(login);
+        public async Task<TokenViewModel> LoginAsync([FromBody] LoginViewModel login) => 
+            await _loginService.LoginAsync(login);
     }
 }

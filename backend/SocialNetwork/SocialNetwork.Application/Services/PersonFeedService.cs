@@ -17,13 +17,13 @@ namespace SocialNetwork.Application.Services
             _currentUser = currentUser;
         }
 
-        public void PostMessage(PostMessageViewModel postMessage)
+        public async Task PostMessageAsync(PostMessageViewModel postMessage)
         {
             var newPost = new PersonFeedEntity(_currentUser.IdPersonCurrent, postMessage.Message);
-            _personFeedRepository.Insert(newPost);
+            await _personFeedRepository.InsertAsync(newPost);
         }
 
-        public PageResult Paged(PageQuery pageQuery) =>
-            _personFeedRepository.GetPaginatedAll(pageQuery);
+        public async Task<PageResult> PagedAsync(PageQuery pageQuery) =>
+            await _personFeedRepository.GetPaginatedAllAsync(pageQuery);
     }
 }

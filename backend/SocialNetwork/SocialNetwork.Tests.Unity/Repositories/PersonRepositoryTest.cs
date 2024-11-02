@@ -1,6 +1,5 @@
 ﻿using NSubstitute;
 using SocialNetwork.Application.Repositories;
-using SocialNetwork.Domain.Resources;
 using SocialNetwork.Tests.Unity.Fakers;
 
 namespace SocialNetwork.Tests.Unity.Repositories
@@ -14,24 +13,24 @@ namespace SocialNetwork.Tests.Unity.Repositories
         {
             //Arrange
             var newPerson = PersonFaker.NewPersonEntity();
-            _personRepository.Insert(newPerson).Returns(newPerson);
+            _personRepository.InsertAsync(newPerson).Returns(newPerson);
 
             //Act
-            var exception = Record.Exception(() => _personRepository.Insert(newPerson));
+            var exception = Record.ExceptionAsync(async () => await _personRepository.InsertAsync(newPerson));
 
             //Assert
-            Assert.Null(exception);
+            Assert.Null(exception.Exception);
         }
 
         [Fact]
-        public void GetByEmail_Sucess() 
+        public async Task GetByEmail_SucessAsync() 
         {
             //Arrange
             var newPerson = PersonFaker.NewPersonEntity();
-            _personRepository.GetByEmail(newPerson.Email).Returns(newPerson);
+            _personRepository.GetByEmailAsync(newPerson.Email).Returns(newPerson);
 
             //Act
-            var person = _personRepository.GetByEmail(newPerson.Email);
+            var person = await _personRepository.GetByEmailAsync(newPerson.Email);
 
             //Assert
             Assert.NotNull(person);

@@ -4,7 +4,7 @@ namespace SocialNetwork.Application.Repositories
 {
     public interface IPersonRepository
     {
-        PersonEntity Insert(PersonEntity person);
-        PersonEntity? GetByEmail(string email);
+        Task<PersonEntity> InsertAsync(PersonEntity person);
+        Task<PersonEntity?> GetByEmailAsync(string email);
     }
 }

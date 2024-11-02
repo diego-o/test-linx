@@ -14,13 +14,13 @@ namespace SocialNetwork.Infrastructure.Repositories
             _dbContext = dbContext;
         }
 
-        public PersonEntity? GetByEmail(string email) =>
-            _dbContext.Persons.AsNoTracking().FirstOrDefault(x => x.Email == email);
+        public async Task<PersonEntity?> GetByEmailAsync(string email) =>
+            await _dbContext.Persons.AsNoTracking().FirstOrDefaultAsync(x => x.Email == email);
 
-        public PersonEntity Insert(PersonEntity person)
+        public async Task<PersonEntity> InsertAsync(PersonEntity person)
         {
-            _dbContext.Persons.Add(person);
-            _dbContext.SaveChanges();
+            await _dbContext.Persons.AddAsync(person);
+            await _dbContext.SaveChangesAsync();
             return person;
         }
     }

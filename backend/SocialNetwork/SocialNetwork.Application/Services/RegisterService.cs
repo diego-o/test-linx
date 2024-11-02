@@ -14,18 +14,18 @@ namespace SocialNetwork.Application.Services
             _personRepository = personRepository;
         }
 
-        public void RegisterPerson(NewPersonViewModel newPerson)
+        public async Task RegisterPersonAsync(NewPersonViewModel newPerson)
         {
-            VerifyExists(newPerson);
-            PersistPerson(newPerson);
+            await VerifyExistsAsync(newPerson);
+            await PersistPersonAsync(newPerson);
         }
 
-        private void PersistPerson(NewPersonViewModel newPerson)
+        private async Task PersistPersonAsync(NewPersonViewModel newPerson)
         {
             newPerson = CriptPassword(newPerson);
 
             var personEntity = new PersonEntity(newPerson.Name, newPerson.Email, newPerson.Birth, newPerson.Password);
-            _personRepository.Insert(personEntity);
+            await _personRepository.InsertAsync(personEntity);
         }
 
         private static NewPersonViewModel CriptPassword(NewPersonViewModel newPerson)
@@ -34,9 +34,9 @@ namespace SocialNetwork.Application.Services
             return newPerson;
         }
 
-        private void VerifyExists(NewPersonViewModel newPerson)
+        private async Task VerifyExistsAsync(NewPersonViewModel newPerson)
         {
-            var personExist = _personRepository.GetByEmail(newPerson.Email);
+            var personExist = await _personRepository.GetByEmailAsync(newPerson.Email);
 
             if (personExist is not null)
                 throw new ArgumentException("E-mail já cadastrado");

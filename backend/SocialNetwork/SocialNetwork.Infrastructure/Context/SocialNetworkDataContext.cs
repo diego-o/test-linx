@@ -16,6 +16,11 @@ namespace SocialNetwork.Infrastructure.Context
         public DbSet<PersonEntity> Persons { get; set; }
         public DbSet<PersonFeedEntity> Feeds { get; set; }
 
+        public async Task<int> SaveChangesAsync()
+        {
+            return await base.SaveChangesAsync();
+        }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             PersonModelBuilder.Builder(modelBuilder);

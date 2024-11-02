@@ -16,9 +16,10 @@ namespace SocialNetwork.Application.Services
             _tokenService = tokenService;
         }
 
-        public TokenViewModel Login(LoginViewModel login)
+        public async Task<TokenViewModel> LoginAsync(LoginViewModel login)
         {
-            var person = _personRepository.GetByEmail(login.Email) ?? throw new ArgumentException("usuário não encontrado");
+            var person = await _personRepository.GetByEmailAsync(login.Email) ?? 
+                throw new ArgumentException("usuário não encontrado");
 
             VerifyPassword(login, person);
 

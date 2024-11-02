@@ -5,7 +5,7 @@ namespace SocialNetwork.Application.Repositories
 {
     public interface IPersonFeedRepository
     {
-        void Insert(PersonFeedEntity personFeed);
-        PageResult GetPaginatedAll(PageQuery page);
+        Task InsertAsync(PersonFeedEntity personFeed);
+        Task<PageResult> GetPaginatedAllAsync(PageQuery page);
     }
 }

@@ -16,9 +16,9 @@ namespace SocialNetwork.Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult NewAccount([FromBody] NewPersonViewModel newPerson)
+        public async Task<IActionResult> NewAccountAsync([FromBody] NewPersonViewModel newPerson)
         {
-            _registerService.RegisterPerson(newPerson);
+            await _registerService.RegisterPersonAsync(newPerson);
             return Created();
         }
     }

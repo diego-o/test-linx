@@ -3,6 +3,7 @@ using SocialNetwork.Application.Repositories;
 using SocialNetwork.Application.Structures;
 using SocialNetwork.Domain.Entities;
 using SocialNetwork.Infrastructure.Context.Interfaces;
+
 namespace SocialNetwork.Infrastructure.Repositories
 {
     public class PersonFeedRepository : IPersonFeedRepository
@@ -14,18 +15,18 @@ namespace SocialNetwork.Infrastructure.Repositories
             _dataContext = dataContext;
         }
 
-        public PageResult GetPaginatedAll(PageQuery page)
+        public async Task<PageResult> GetPaginatedAllAsync(PageQuery page)
         {
-            var feeds = _dataContext.Feeds
+            var feeds = await _dataContext.Feeds
                 .Include(t => t.Person)
                 .AsNoTracking()
                 .Where(t => t.DateMessage >= DateTime.Now.Date)
                 .OrderByDescending(t => t.DateMessage)
                 .Skip((page.Page - 1) * page.Size)
                 .Take(page.Size)
-                .ToList();
+                .ToListAsync();
 
-            var totalFeeds = _dataContext.Feeds.AsNoTracking().Where(t => t.DateMessage >= DateTime.Now.Date).Count();
+            var totalFeeds =  await _dataContext.Feeds.AsNoTracking().Where(t => t.DateMessage >= DateTime.Now.Date).CountAsync();
             var totalPages = (int)Math.Ceiling((double)totalFeeds / page.Size);
 
             return new PageResult()
@@ -44,10 +45,10 @@ namespace SocialNetwork.Infrastructure.Repositories
             };
         }
 
-        public void Insert(PersonFeedEntity personFeed)
+        public async Task InsertAsync(PersonFeedEntity personFeed)
         {
-            _dataContext.Feeds.Add(personFeed);
-            _dataContext.SaveChanges();
+            await _dataContext.Feeds.AddAsync(personFeed);
+            await _dataContext.SaveChangesAsync();
         }
     }
 }

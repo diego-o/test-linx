@@ -5,7 +5,7 @@ namespace SocialNetwork.Application.Services.Interface
 {
     public interface IPersonFeedService
     {
-        void PostMessage(PostMessageViewModel postMessage);
-        PageResult Paged(PageQuery pageQuery);
+        Task PostMessageAsync(PostMessageViewModel postMessage);
+        Task<PageResult> PagedAsync(PageQuery pageQuery);
     }
 }
