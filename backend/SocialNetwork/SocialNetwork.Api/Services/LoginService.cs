@@ -20,7 +20,7 @@ namespace SocialNetwork.Api.Services
 
             VerifyPassword(login, person);
 
-            var token = TokenService.GenerateJWTToken(person.Email);
+            var token = TokenService.GenerateJWTToken(person.Email, person.Id);
 
             return new TokenViewModel
             {

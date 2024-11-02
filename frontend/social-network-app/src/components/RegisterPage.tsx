@@ -1,4 +1,3 @@
-// src/components/RegistrationForm.tsx
 import React, { useState } from 'react';
 import apiService from '../services/apiService';
 import { Register } from '../types/types';
@@ -128,7 +127,6 @@ const RegistrationForm: React.FC = () => {
     );
 };
 
-// Estilos básicos do formulário
 const styles = {
     form: {
         display: 'flex',

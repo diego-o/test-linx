@@ -6,8 +6,5 @@ namespace SocialNetwork.Api.ViewModel
     {
         [Required]
         public string Message { get; set; }
-
-        [Required]
-        public int IdPerson { get; set; }
     }
 }

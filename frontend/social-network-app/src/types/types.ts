@@ -15,3 +15,7 @@ export type MyCustomError = {
     Message: string;
     Detail: string;
 }
+
+export type Message = {
+    message: string;
+}

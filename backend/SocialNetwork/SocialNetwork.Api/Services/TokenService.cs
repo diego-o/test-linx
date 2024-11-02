@@ -12,19 +12,30 @@ namespace SocialNetwork.Api.Services
         public static byte[] Key => Encoding.ASCII.GetBytes(_secret);
         public static int ExpiredTimeToken { get; set; } = 30;
 
-        public static string GenerateJWTToken(string UserName)
+        public static string GenerateJWTToken(string UserName, int userId)
         {
             var tokenHandler = new JwtSecurityTokenHandler();
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity([new(ClaimTypes.Name, UserName)]),
+                Subject = new ClaimsIdentity([
+                    new(ClaimTypes.Name, UserName),
+                    new("userId", userId.ToString())
+                ]),
                 Expires = ExpireIn(),
                 SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Key), SecurityAlgorithms.HmacSha256Signature)
             };
 
             var token = tokenHandler.CreateToken(tokenDescriptor);
             return tokenHandler.WriteToken(token);
+        }
+
+        public static JwtSecurityToken? FromToken(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jsonToken = handler.ReadToken(token);
+
+            return handler.ReadToken(token) as JwtSecurityToken;
         }
 
         public static DateTime ExpireIn()

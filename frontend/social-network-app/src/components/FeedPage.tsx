@@ -1,22 +1,15 @@
 import React, { useState } from 'react';
 import apiService from '../services/apiService';
-import { Login } from '../types/types';
+import { Message, Register } from '../types/types';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import tokenService from '../services/tokenService';
 
 interface FormData {
-    email: string;
-    password: string;
+    message: string;
 }
 
-const LoginPage: React.FC = () => {
-    tokenService.clearToken();
-    const navigate = useNavigate();
-
+const FeedPage: React.FC = () => {
     const [formData, setFormData] = useState<FormData>({
-        email: '',
-        password: ''
+        message: ''
     });
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,52 +26,44 @@ const LoginPage: React.FC = () => {
         e.preventDefault();
 
         try {
-            const login: Login = {
-                email: formData.email,
-                password: formData.password
+            setError('');
+
+            const message: Message = {
+                message: formData.message
             }
-            var token = await apiService.login(login);
-            tokenService.saveToken(token.token);
-            setError('Logado com sucesso');
-            navigate('/feed');
+            await apiService.postMessage(message);
+            setError('Mensagem postada com sucesso');
+            formData.message = "";
         } catch (error) {
-            setError((error as any).response.data.Detail);
+            if ((error as any).response?.data?.Detail ==undefined)
+                setError("Ocorreu um erro inesperado");
+            else
+                setError((error as any).response?.data?.Detail);
         }
     };
 
     return (
         <div style={styles.container}>
-            <h1>Login</h1>
+            <h1>Feed</h1>
             <form onSubmit={handleSubmit} style={styles.form}>
                 <div style={styles.inputGroup}>
-                    <label htmlFor="email">E-mail:</label>
+                    <label htmlFor="message">Digite uma Mensagem:</label>
                     <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
+                        type="text"
+                        id="message"
+                        name="message"
+                        value={formData.message}
                         onChange={handleChange}
                         required
                         style={styles.input}
                     />
                 </div>
-                <div style={styles.inputGroup}>
-                    <label htmlFor="password">Senha:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={formData.password}
-                        onChange={handleChange}
-                        required
-                        style={styles.input}
-                    />
-                </div>
+                
                 {error && <p style={styles.error}>{error}</p>}
-                <button type="submit" style={styles.button}>Logar</button>
+                <button type="submit" style={styles.button}>Postar</button>
             </form>
             <div style={styles.container}>
-                <button style={styles.button}><Link to="/register">Primeiro Acesso</Link></button>
+                <button style={styles.button}><Link to="/">Sair</Link></button>
             </div>            
         </div>
 
@@ -91,7 +76,7 @@ const styles = {
         flexDirection: 'column' as 'column',
         alignItems: 'center',
         gap: '10px',
-        width: '300px',
+        width: '800px',
         margin: '20px auto',
         padding: '20px',
         border: '1px solid #ddd',
@@ -127,4 +112,4 @@ const styles = {
     }
 };
 
-export default LoginPage;
+export default FeedPage;
