@@ -1,4 +1,5 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
 
 namespace SocialNetwork.Application.Services.Interface
 {
@@ -7,6 +8,7 @@ namespace SocialNetwork.Application.Services.Interface
         int ExpiredTimeToken();
         DateTime ExpireIn();
         JwtSecurityToken? FromToken(string token);
-        string GenerateJWTToken(string UserName, int userId);
+        string GenerateJWTToken(string userName, int userId);
+        ClaimsPrincipal? ValidateToken(string token);
     }
 }

@@ -54,5 +54,7 @@ namespace SocialNetwork.Domain.Entities
             if (age > 150)
                 throw new ArgumentException(DomainValidationsResource.OlderThan);
         }
+
+        public void SetId(int id) => this.Id = id;
     }
 }
