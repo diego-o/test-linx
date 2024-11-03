@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using SocialNetwork.Domain.Entities;
 
 namespace SocialNetwork.Infrastructure.Context.Interfaces
@@ -7,5 +8,7 @@ namespace SocialNetwork.Infrastructure.Context.Interfaces
     {
         DbSet<PersonEntity> Persons { get; set; }
         DbSet<PersonFeedEntity> Feeds { get; set; }
+
+        DatabaseFacade Database { get; }
     }
 }

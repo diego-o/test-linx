@@ -7,7 +7,7 @@ namespace SocialNetwork.Infrastructure.Context
 {
     public class SocialNetworkDataContext : DbContext, ISocialNetworkDataContext
     {
-        public SocialNetworkDataContext(DbContextOptions<SocialNetworkDataContext> options) : base(options) 
+        public SocialNetworkDataContext(DbContextOptions options) : base(options)
         {
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);

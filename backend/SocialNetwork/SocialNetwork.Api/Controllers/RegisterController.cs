@@ -6,11 +6,11 @@ namespace SocialNetwork.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Register : ControllerBase
+    public class RegisterController : ControllerBase
     {
         private readonly IRegisterService _registerService;
 
-        public Register(IRegisterService registerService)
+        public RegisterController(IRegisterService registerService)
         {
             _registerService = registerService;
         }
@@ -19,7 +19,7 @@ namespace SocialNetwork.Api.Controllers
         public async Task<IActionResult> NewAccountAsync([FromBody] NewPersonViewModel newPerson)
         {
             await _registerService.RegisterPersonAsync(newPerson);
-            return Created();
+            return Created(string.Empty, null);
         }
     }
 }
