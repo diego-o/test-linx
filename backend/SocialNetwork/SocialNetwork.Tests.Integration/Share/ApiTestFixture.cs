@@ -6,7 +6,6 @@ using SocialNetwork.Infrastructure.Context;
 
 namespace SocialNetwork.Tests.Integration.Share
 {
-    [Collection("ApiInstance")]
     public class ApiTestFixture : WebApplicationFactory<Program>
     {
         protected override void ConfigureWebHost(IWebHostBuilder builder)

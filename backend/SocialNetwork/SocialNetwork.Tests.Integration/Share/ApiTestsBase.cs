@@ -3,7 +3,6 @@ using System.Text;
 
 namespace SocialNetwork.Tests.Integration.Share
 {
-    [Collection("ApiInstance")]
     public class ApiTestsBase : IClassFixture<ApiTestFixture>
     {
         protected readonly HttpClient Client;
