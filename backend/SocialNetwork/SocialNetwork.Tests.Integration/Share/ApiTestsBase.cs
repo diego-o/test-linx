@@ -23,7 +23,7 @@ namespace SocialNetwork.Tests.Integration.Share
             return JsonConvert.SerializeObject(obj);
         }
 
-        protected TObject DeserializeObject<TObject>(string content)
+        protected TObject? DeserializeObject<TObject>(string content)
         {
             return JsonConvert.DeserializeObject<TObject>(content);
         }

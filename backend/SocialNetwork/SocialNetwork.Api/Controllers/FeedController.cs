@@ -22,7 +22,7 @@ namespace SocialNetwork.Api.Controllers
         public async Task<IActionResult> PostMessageAsync([FromBody] PostMessageViewModel postMessage)
         {
             await _personFeedService.PostMessageAsync(postMessage);
-            return Created();
+            return Created(string.Empty, null);
         }
 
         [HttpPost("paged")]
