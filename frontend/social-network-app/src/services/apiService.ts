@@ -27,7 +27,7 @@ const apiService = {
         });
         return response.data;
     },
-    getFeeds: async (pageQuery: PageQuery): Promise<PageResult> => {
+    getFeed: async (pageQuery: PageQuery): Promise<PageResult> => {
         const response = await api.post<PageResult>('/Feed/paged', pageQuery, {
             headers: {
                 'Content-Type': 'application/json',

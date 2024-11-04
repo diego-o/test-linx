@@ -17,7 +17,7 @@ namespace SocialNetwork.Infrastructure.Repositories
 
         public async Task<PageResult> GetPaginatedAllAsync(PageQuery page)
         {
-            var feeds = await _dataContext.Feeds
+            var feeds = await _dataContext.Feed
                 .Include(t => t.Person)
                 .AsNoTracking()
                 .Where(t => t.DateMessage >= DateTime.Now.Date)
@@ -26,7 +26,7 @@ namespace SocialNetwork.Infrastructure.Repositories
                 .Take(page.Size)
                 .ToListAsync();
 
-            var totalFeeds =  await _dataContext.Feeds.AsNoTracking().Where(t => t.DateMessage >= DateTime.Now.Date).CountAsync();
+            var totalFeeds =  await _dataContext.Feed.AsNoTracking().Where(t => t.DateMessage >= DateTime.Now.Date).CountAsync();
             var totalPages = (int)Math.Ceiling((double)totalFeeds / page.Size);
 
             return new PageResult()
@@ -47,7 +47,7 @@ namespace SocialNetwork.Infrastructure.Repositories
 
         public async Task InsertAsync(PersonFeedEntity personFeed)
         {
-            await _dataContext.Feeds.AddAsync(personFeed);
+            await _dataContext.Feed.AddAsync(personFeed);
             await _dataContext.SaveChangesAsync();
         }
     }

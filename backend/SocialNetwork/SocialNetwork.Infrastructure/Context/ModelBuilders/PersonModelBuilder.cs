@@ -14,7 +14,7 @@ namespace SocialNetwork.Infrastructure.Context.ModelBuilders
                 e.Property(e => e.Birth).IsRequired();
                 e.Property(e => e.Password).IsRequired();
                 e.Property(e => e.Email).IsRequired().HasMaxLength(100);
-                e.HasMany(t => t.Feeds).WithOne(t => t.Person).HasForeignKey(t => t.IdPerson);
+                e.HasMany(t => t.Feed).WithOne(t => t.Person).HasForeignKey(t => t.IdPerson);
             });
         }
     }

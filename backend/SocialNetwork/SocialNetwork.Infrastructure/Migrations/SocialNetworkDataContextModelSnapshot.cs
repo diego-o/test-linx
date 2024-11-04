@@ -31,7 +31,7 @@ namespace SocialNetwork.Infrastructure.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("Birth")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -61,7 +61,7 @@ namespace SocialNetwork.Infrastructure.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DateMessage")
-                        .HasColumnType("timestamp with time zone");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("IdPerson")
                         .HasColumnType("integer");
@@ -74,13 +74,13 @@ namespace SocialNetwork.Infrastructure.Migrations
 
                     b.HasIndex("IdPerson");
 
-                    b.ToTable("Feeds");
+                    b.ToTable("Feed");
                 });
 
             modelBuilder.Entity("SocialNetwork.Domain.Entities.PersonFeedEntity", b =>
                 {
                     b.HasOne("SocialNetwork.Domain.Entities.PersonEntity", "Person")
-                        .WithMany("Feeds")
+                        .WithMany("Feed")
                         .HasForeignKey("IdPerson")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -90,7 +90,7 @@ namespace SocialNetwork.Infrastructure.Migrations
 
             modelBuilder.Entity("SocialNetwork.Domain.Entities.PersonEntity", b =>
                 {
-                    b.Navigation("Feeds");
+                    b.Navigation("Feed");
                 });
 #pragma warning restore 612, 618
         }

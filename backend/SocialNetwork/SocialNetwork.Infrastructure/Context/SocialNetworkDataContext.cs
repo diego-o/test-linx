@@ -14,7 +14,7 @@ namespace SocialNetwork.Infrastructure.Context
         }
 
         public DbSet<PersonEntity> Persons { get; set; }
-        public DbSet<PersonFeedEntity> Feeds { get; set; }
+        public DbSet<PersonFeedEntity> Feed { get; set; }
 
         public async Task<int> SaveChangesAsync()
         {

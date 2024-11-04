@@ -11,7 +11,7 @@ namespace SocialNetwork.Infrastructure.Context.ModelBuilders
             {
                 e.HasKey(e => e.Id);
                 e.Property(e => e.Message).IsRequired();
-                e.HasOne(t => t.Person).WithMany(t => t.Feeds);
+                e.HasOne(t => t.Person).WithMany(t => t.Feed);
             });
         }
     }

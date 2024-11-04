@@ -7,7 +7,7 @@ namespace SocialNetwork.Infrastructure.Context.Interfaces
     public interface ISocialNetworkDataContext : IDbContext
     {
         DbSet<PersonEntity> Persons { get; set; }
-        DbSet<PersonFeedEntity> Feeds { get; set; }
+        DbSet<PersonFeedEntity> Feed { get; set; }
 
         DatabaseFacade Database { get; }
     }

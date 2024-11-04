@@ -10,7 +10,7 @@ namespace SocialNetwork.Domain.Entities
         public DateTime Birth { get; private set; }
         public string Password { get; private set; }
 
-        public List<PersonFeedEntity> Feeds { get; set; }
+        public List<PersonFeedEntity> Feed { get; set; }
 
         public PersonEntity() { }
 

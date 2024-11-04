@@ -20,7 +20,7 @@ namespace SocialNetwork.Infrastructure.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     Name = table.Column<string>(type: "character varying(120)", maxLength: 120, nullable: false),
                     Email = table.Column<string>(type: "character varying(100)", maxLength: 100, nullable: false),
-                    Birth = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Birth = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
@@ -29,19 +29,20 @@ namespace SocialNetwork.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Feeds",
+                name: "Feed",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     IdPerson = table.Column<int>(type: "integer", nullable: false),
-                    Message = table.Column<string>(type: "text", nullable: false)
+                    Message = table.Column<string>(type: "text", nullable: false),
+                    DateMessage = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Feeds", x => x.Id);
+                    table.PrimaryKey("PK_Feed", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Feeds_Persons_IdPerson",
+                        name: "FK_Feed_Persons_IdPerson",
                         column: x => x.IdPerson,
                         principalTable: "Persons",
                         principalColumn: "Id",
@@ -49,8 +50,8 @@ namespace SocialNetwork.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Feeds_IdPerson",
-                table: "Feeds",
+                name: "IX_Feed_IdPerson",
+                table: "Feed",
                 column: "IdPerson");
         }
 
@@ -58,7 +59,7 @@ namespace SocialNetwork.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Feeds");
+                name: "Feed");
 
             migrationBuilder.DropTable(
                 name: "Persons");

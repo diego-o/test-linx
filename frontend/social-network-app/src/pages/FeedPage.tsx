@@ -10,13 +10,13 @@ interface FormData {
 }
 
 const FeedPage: React.FC = () => {
-    const [feeds, setFeeds] = useState<PageResultFeed[]>([]);
+    const [feed, setFeed] = useState<PageResultFeed[]>([]);
     const [pagination, setPagination] = useState<PageResult>();
     const [pages, setPages] = useState<number[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
-            await listFeeds();
+            await listFeed();
         };
         fetchData();
     }, []);
@@ -51,7 +51,7 @@ const FeedPage: React.FC = () => {
                 message: formData.message
             }
             await apiService.postMessage(message);
-            await listFeeds();
+            await listFeed();
         } catch (error) {
             if ((error as any).response?.data?.Detail == undefined)
                 setError("Ocorreu um erro inesperado");
@@ -60,14 +60,14 @@ const FeedPage: React.FC = () => {
         }
     };
 
-    const listFeeds = async (page: number = 1) => {
+    const listFeed = async (page: number = 1) => {
         try {
             const pageQuery: PageQuery = {
                 page: page,
                 size: 5
             };
-            var response = await apiService.getFeeds(pageQuery);
-            setFeeds(response.dataSource);
+            var response = await apiService.getFeed(pageQuery);
+            setFeed(response.dataSource);
             setPagination(response);
 
             const pageNumbers = [];
@@ -102,7 +102,7 @@ const FeedPage: React.FC = () => {
             <div>
                 <h2>Postagens Recentes</h2>
                 <div className="feed-list">
-                    {feeds.map(feed => (
+                    {feed.map(feed => (
                         <FeedItem
                             key={feed.id}
                             title={formatDate(feed.dateMessage)}
@@ -113,7 +113,7 @@ const FeedPage: React.FC = () => {
                 </div>
                 <div className='fedd-pagination'>
                     {pages.map(page => (
-                        <button style={feedStyle.buttonPage} onClick={() => listFeeds(page)}>{page}</button>
+                        <button style={feedStyle.buttonPage} onClick={() => listFeed(page)}>{page}</button>
                     ))}
                 </div>
             </div>
