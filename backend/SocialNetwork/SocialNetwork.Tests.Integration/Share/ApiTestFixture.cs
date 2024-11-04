@@ -33,8 +33,6 @@ namespace SocialNetwork.Tests.Integration.Share
 
         private static void ConfigurePersonMock(SocialNetworkDataContext dbContext)
         {
-            dbContext.Persons.ExecuteDelete();
-
             dbContext.Persons.Add(PersonEntityMock.PersonMock());
             dbContext.SaveChanges();
         }
