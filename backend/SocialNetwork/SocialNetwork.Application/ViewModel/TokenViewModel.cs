@@ -1,6 +1,6 @@
 ﻿namespace SocialNetwork.Application.ViewModel
 {
-    public struct TokenViewModel
+    public class TokenViewModel
     {
         public string Token { get; set; }
         public int ExpiresIn { get; set; }

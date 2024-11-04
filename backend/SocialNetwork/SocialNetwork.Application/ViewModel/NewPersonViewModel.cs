@@ -2,7 +2,7 @@
 
 namespace SocialNetwork.Application.ViewModel
 {
-    public struct NewPersonViewModel
+    public class NewPersonViewModel
     {
         [Required]
         public string Name { get; set; }
